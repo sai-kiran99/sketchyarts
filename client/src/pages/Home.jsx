@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import bannerImage from '../assets/banner.jpg';
-import axios from 'axios';
+//import axios from 'axios';
+import axios from '../axiosInstance';
 
 const Home = () => {
   const [showPopup, setShowPopup] = useState(false);

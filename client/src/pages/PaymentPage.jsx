@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import axios from 'axios';
+//import axios from 'axios';
+import axios from '../axiosInstance';
 import Swal from 'sweetalert2';
 import '../Main.css';
 

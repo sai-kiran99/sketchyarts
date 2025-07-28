@@ -2,7 +2,8 @@ import { useCart } from '../context/CartContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiX } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+//import axios from 'axios';
+import axios from '../axiosInstance';
 
 const CartPage = () => {
   const { cartItems, removeFromCart } = useCart();

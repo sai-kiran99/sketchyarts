@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+//import axios from 'axios';
+import axios from '../axiosInstance';
 import { useNavigate, Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { toast, ToastContainer } from 'react-toastify';
