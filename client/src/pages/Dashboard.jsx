@@ -19,7 +19,7 @@ const Dashboard = () => {
     const token = localStorage.getItem('token');
     if (!token) return navigate('/login');
 
-    axios.get('http://localhost:5000/api/auth/profile', {
+    axios.get('/api/auth/profile', {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => {
@@ -50,7 +50,7 @@ const handlePicUpload = async (e) => {
 
     // ✅ Auto-save to backend
     const token = localStorage.getItem('token');
-    await axios.put('http://localhost:5000/api/auth/profile', {
+    await axios.put('/api/auth/profile', {
       ...formData,
       profilePic: imageUrl
     }, {
@@ -58,7 +58,7 @@ const handlePicUpload = async (e) => {
     });
 
     // ✅ Refresh updated user
-    const updated = await axios.get('http://localhost:5000/api/auth/profile', {
+    const updated = await axios.get('/api/auth/profile', {
       headers: { Authorization: `Bearer ${token}` },
     });
     setUser(updated.data);
@@ -75,11 +75,11 @@ const handlePicUpload = async (e) => {
   const handleUpdate = async () => {
     const token = localStorage.getItem('token');
     try {
-      await axios.put('http://localhost:5000/api/auth/profile', formData, {
+      await axios.put('/api/auth/profile', formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      const res = await axios.get('http://localhost:5000/api/auth/profile', {
+      const res = await axios.get('/api/auth/profile', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -100,7 +100,7 @@ const handlePicUpload = async (e) => {
   const cancelOrder = async (orderId) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.put('http://localhost:5000/api/auth/cancel-order', { orderId }, {
+      await axios.put('/api/auth/cancel-order', { orderId }, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUser(prev => ({
@@ -117,7 +117,7 @@ const handlePicUpload = async (e) => {
   const deleteOrder = async (orderId) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`http://localhost:5000/api/auth/delete-order/${orderId}`, {
+      await axios.delete(`/api/auth/delete-order/${orderId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUser(prev => ({

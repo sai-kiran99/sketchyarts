@@ -11,7 +11,7 @@ const MyOrders = () => {
     const token = localStorage.getItem('token');
     if (!token) return navigate('/login');
 
-    axios.get('http://localhost:5000/api/auth/profile', {
+    axios.get('/api/auth/profile', {
       headers: { Authorization: `Bearer ${token}` }
     }).then((res) => {
       setOrders(res.data.orders.reverse());

@@ -29,7 +29,7 @@ const PaymentPage = () => {
     const token = localStorage.getItem('token');
     if (!token) return navigate('/login');
 
-    axios.get('http://localhost:5000/api/auth/profile', {
+    axios.get('/api/auth/profile', {
       headers: { Authorization: `Bearer ${token}` },
     }).then((res) => {
       const saved = Array.isArray(res.data.address) ? res.data.address : [];
@@ -96,7 +96,7 @@ const PaymentPage = () => {
 
     try {
       await axios.put(
-        'http://localhost:5000/api/auth/add-order',
+        '/api/auth/add-order',
         {
           items: cartItems.map(({ _id, id, ...item }) => item),
           total: finalTotal,
@@ -153,7 +153,7 @@ const PaymentPage = () => {
 
     try {
       const updated = addresses.filter((_, i) => i !== index);
-      await axios.put('http://localhost:5000/api/auth/save-address', updated, {
+      await axios.put('/api/auth/save-address', updated, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAddresses(updated);
@@ -175,7 +175,7 @@ const PaymentPage = () => {
     }
 
     try {
-      const res = await axios.put('http://localhost:5000/api/auth/save-address', newAddress, {
+      const res = await axios.put('/api/auth/save-address', newAddress, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAddresses(res.data.addressList);

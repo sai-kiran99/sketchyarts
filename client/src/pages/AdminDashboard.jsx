@@ -38,13 +38,13 @@ const AdminDashboard = () => {
 
   const fetchData = async () => {
     try {
-      const profile = await axios.get('http://localhost:5000/api/auth/profile', {
+      const profile = await axios.get('/api/auth/profile', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAdmin(profile.data);
       setAdminForm({ name: profile.data.name || '', phone: profile.data.phone || '' });
 
-      const res = await axios.get('http://localhost:5000/api/auth/admin/all-users', {
+      const res = await axios.get('/api/auth/admin/all-users', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(res.data);
@@ -56,7 +56,7 @@ const AdminDashboard = () => {
 
   const fetchCoupons = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/admin/coupons', {
+      const res = await axios.get('/api/admin/coupons', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCoupons(res.data);
@@ -70,7 +70,7 @@ const AdminDashboard = () => {
 
 const fetchAllSettings = async () => {
   try {
-    const res = await axios.get('http://localhost:5000/api/admin/settings');
+    const res = await axios.get('/api/admin/settings');
     const sorted = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     setAllSettings(sorted);
   } catch (err) {
@@ -86,7 +86,7 @@ const deleteSetting = async (id) => {
   if (!window.confirm('Are you sure you want to delete this setting?')) return;
 
   try {
-    await axios.delete(`http://localhost:5000/api/admin/settings/${id}`, {
+    await axios.delete(`/api/admin/settings/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     fetchAllSettings();
@@ -119,7 +119,7 @@ const saveSettings = async () => {
   }
 
   try {
-    await axios.put('http://localhost:5000/api/admin/settings', settings, {
+    await axios.put('/api/admin/settings', settings, {
       headers: { Authorization: `Bearer ${token}` },
     });
     setMessage('✅ Settings updated!');
@@ -137,7 +137,7 @@ const saveSettings = async () => {
 
   const handleAdminUpdate = async () => {
     try {
-      await axios.put('http://localhost:5000/api/admin/update-admin', adminForm, {
+      await axios.put('/api/admin/update-admin', adminForm, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMessage('✅ Profile updated!');
@@ -153,7 +153,7 @@ const saveSettings = async () => {
   const handleChangePassword = async () => {
     try {
       await axios.put(
-        'http://localhost:5000/api/admin/change-password',
+        '/api/admin/change-password',
         { currentPassword, newPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -171,7 +171,7 @@ const saveSettings = async () => {
   const deleteUser = async (id) => {
     if (window.confirm('Delete user?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/admin/delete-user/${id}`, {
+        await axios.delete(`/api/admin/delete-user/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         fetchData();
@@ -187,7 +187,7 @@ const saveSettings = async () => {
   const updateOrderStatus = async (userId, index, newStatus) => {
     try {
       await axios.put(
-        'http://localhost:5000/api/admin/update-order-status',
+        '/api/admin/update-order-status',
         { userId, index, newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -202,7 +202,7 @@ const saveSettings = async () => {
 
   const deleteOrder = async (userId, index) => {
     try {
-      await axios.delete(`http://localhost:5000/api/admin/delete-order/${userId}/${index}`, {
+      await axios.delete(`/api/admin/delete-order/${userId}/${index}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchData();
@@ -223,7 +223,7 @@ const saveSettings = async () => {
     }
 
     try {
-      await axios.post('http://localhost:5000/api/admin/coupons', newCoupon, {
+      await axios.post('/api/admin/coupons', newCoupon, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNewCoupon({ code: '', discount: '' });
@@ -238,7 +238,7 @@ const saveSettings = async () => {
 
   const deleteCoupon = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/admin/coupons/${id}`, {
+      await axios.delete(`/api/admin/coupons/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchCoupons();

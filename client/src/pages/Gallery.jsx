@@ -21,7 +21,7 @@ const Gallery = () => {
 
   const fetchImages = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/admin/gallery-public');
+      const res = await axios.get('/api/admin/gallery-public');
       setImages(res.data.reverse());
     } catch (err) {
       toast.error('Failed to load gallery');
@@ -30,7 +30,7 @@ const Gallery = () => {
 
   const fetchProfile = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/auth/profile', {
+      const res = await axios.get('/api/auth/profile', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setIsAdmin(res.data.isAdmin);
@@ -52,7 +52,7 @@ const Gallery = () => {
       const cloudRes = await axios.post('https://api.cloudinary.com/v1_1/dxzyugxhk/image/upload', formData);
       const imageUrl = cloudRes.data.secure_url;
 
-      await axios.post('http://localhost:5000/api/admin/gallery', {
+      await axios.post('/api/admin/gallery', {
         url: imageUrl,
         title: newTitle
       }, {
@@ -71,7 +71,7 @@ const Gallery = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/admin/gallery/${id}`, {
+      await axios.delete(`/api/admin/gallery/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('Deleted');
@@ -85,7 +85,7 @@ const Gallery = () => {
     if (!titleInput.trim()) return toast.error('Title cannot be empty');
 
     try {
-      await axios.put(`http://localhost:5000/api/admin/gallery/${id}`, {
+      await axios.put(`/api/admin/gallery/${id}`, {
         title: titleInput
       }, {
         headers: { Authorization: `Bearer ${token}` }

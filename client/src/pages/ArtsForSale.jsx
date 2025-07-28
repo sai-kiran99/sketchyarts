@@ -28,7 +28,7 @@ const ArtsForSale = () => {
 
   const fetchProfile = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/auth/profile', {
+      const res = await axios.get('/api/auth/profile', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setIsAdmin(res.data.isAdmin);
@@ -40,8 +40,8 @@ const ArtsForSale = () => {
   const fetchItems = async (adminView = false) => {
     try {
       const url = adminView
-        ? 'http://localhost:5000/api/admin/sale-items'
-        : 'http://localhost:5000/api/admin/sale-items-public';
+        ? '/api/admin/sale-items'
+        : '/api/admin/sale-items-public';
 
       const config = adminView
         ? { headers: { Authorization: `Bearer ${token}` } }
@@ -67,7 +67,7 @@ const ArtsForSale = () => {
       const cloudRes = await axios.post('https://api.cloudinary.com/v1_1/dxzyugxhk/image/upload', formData);
       const imageUrl = cloudRes.data.secure_url;
 
-      await axios.post('http://localhost:5000/api/admin/sale-items', {
+      await axios.post('/api/admin/sale-items', {
         title,
         price,
         offer,
@@ -108,7 +108,7 @@ const ArtsForSale = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/admin/sale-items/${id}`, {
+      await axios.delete(`/api/admin/sale-items/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success('Item deleted');
@@ -126,7 +126,7 @@ const ArtsForSale = () => {
   const handleUpdate = async () => {
     try {
       await axios.put(
-        `http://localhost:5000/api/admin/sale-items/${editingItemId}`,
+        `/api/admin/sale-items/${editingItemId}`,
         editForm,
         {
           headers: { Authorization: `Bearer ${token}` },

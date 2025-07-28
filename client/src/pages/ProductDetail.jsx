@@ -25,7 +25,7 @@ const ProductDetail = () => {
 
   const checkAdmin = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/auth/profile', {
+      const res = await axios.get('/api/auth/profile', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setIsAdmin(res.data?.isAdmin || false);
@@ -36,7 +36,7 @@ const ProductDetail = () => {
 
   const fetchProduct = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/admin/sale-items-public');
+      const res = await axios.get('/api/admin/sale-items-public');
       const found = res.data.find((item) => item._id === id);
       setProduct(found);
       setEditData({
@@ -63,7 +63,7 @@ const ProductDetail = () => {
       const cloudRes = await axios.post('https://api.cloudinary.com/v1_1/dxzyugxhk/image/upload', formData);
       const url = cloudRes.data.secure_url;
 
-      await axios.post(`http://localhost:5000/api/admin/sale-items/${id}/images`, { url }, {
+      await axios.post(`/api/admin/sale-items/${id}/images`, { url }, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -78,7 +78,7 @@ const ProductDetail = () => {
   const handleDeleteImage = async (imgIndex) => {
     if (!window.confirm('Delete this image?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/admin/sale-items/${id}/images/${imgIndex}`, {
+      await axios.delete(`/api/admin/sale-items/${id}/images/${imgIndex}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchProduct();
@@ -89,7 +89,7 @@ const ProductDetail = () => {
 
   const saveEdit = async () => {
     try {
-      await axios.put(`http://localhost:5000/api/admin/sale-items/${id}`, editData, {
+      await axios.put(`/api/admin/sale-items/${id}`, editData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchProduct();

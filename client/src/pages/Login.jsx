@@ -36,7 +36,7 @@ const Login = () => {
 
     if (isLogin) {
       try {
-        const res = await axios.post('http://localhost:5000/api/auth/login', {
+        const res = await axios.post('/api/auth/login', {
           email: formData.email,
           password: formData.password,
         });
@@ -44,7 +44,7 @@ const Login = () => {
         localStorage.setItem('token', res.data.token);
         login(formData.email);
         // ✅ NEW lines to fix profilePic issue
-          const profileRes = await axios.get('http://localhost:5000/api/auth/profile', {
+          const profileRes = await axios.get('/api/auth/profile', {
           headers: {
          Authorization: `Bearer ${res.data.token}`,
       },
@@ -61,7 +61,7 @@ const Login = () => {
         return;
       }
       try {
-        await axios.post('http://localhost:5000/api/auth/register', {
+        await axios.post('/api/auth/register', {
           name: formData.name,
           email: formData.email,
           password: formData.password,
@@ -76,7 +76,7 @@ const Login = () => {
 
   const handleOTPVerify = async () => {
     try {
-      await axios.post('http://localhost:5000/api/auth/verify', {
+      await axios.post('/api/auth/verify', {
         email: formData.email,
         otp,
       });
@@ -91,7 +91,7 @@ const Login = () => {
   // ✨ FORGOT PASSWORD FLOW
   const sendForgotOtp = async () => {
     try {
-      await axios.post('http://localhost:5000/api/auth/send-reset-otp', {
+      await axios.post('/api/auth/send-reset-otp', {
         email: formData.email,
       });
       alert('OTP sent to email');
@@ -103,7 +103,7 @@ const Login = () => {
 
   const verifyForgotOtp = async () => {
     try {
-      await axios.post('http://localhost:5000/api/auth/verify-reset-otp', {
+      await axios.post('/api/auth/verify-reset-otp', {
         email: formData.email,
         otp: forgotOtp,
       });
@@ -116,7 +116,7 @@ const Login = () => {
 
   const resetForgotPassword = async () => {
     try {
-      await axios.post('http://localhost:5000/api/auth/reset-password', {
+      await axios.post('/api/auth/reset-password', {
         email: formData.email,
         newPassword: newForgotPassword,
       });

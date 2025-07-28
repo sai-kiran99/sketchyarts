@@ -16,7 +16,7 @@ const Home = () => {
 
     const fetchSettings = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/admin/settings');
+        const res = await axios.get('/api/admin/settings');
         const allSettings = res.data;
 
         const latest = allSettings.sort(

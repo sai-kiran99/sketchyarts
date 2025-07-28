@@ -20,7 +20,7 @@ const About = () => {
 
   const fetchAbout = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/admin/about');
+      const res = await axios.get('/api/admin/about');
       const data = res.data;
 
       if (data) {
@@ -41,7 +41,7 @@ const About = () => {
 
   const fetchProfile = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/auth/profile', {
+      const res = await axios.get('/api/auth/profile', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setIsAdmin(res.data.isAdmin);
@@ -63,7 +63,7 @@ const About = () => {
       }
 
       await axios.post(
-        'http://localhost:5000/api/admin/about',
+        '/api/admin/about',
         {
           photo: photoUrl,
           description,

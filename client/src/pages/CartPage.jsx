@@ -25,7 +25,7 @@ const CartPage = () => {
 
   const fetchCoupons = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/admin/coupons-public');
+      const res = await axios.get('/api/admin/coupons-public');
       setAvailableCoupons(res.data);
     } catch (err) {
       console.error('Failed to fetch coupons:', err.message);
@@ -35,7 +35,7 @@ const CartPage = () => {
   const fetchUsedCoupons = async () => {
     if (!token) return;
     try {
-      const res = await axios.get('http://localhost:5000/api/auth/profile', {
+      const res = await axios.get('/api/auth/profile', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsedCoupons(res.data.usedCoupons || []);
