@@ -2,7 +2,8 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
-const { sendOrderStatusEmail } = require('./authController');
+const { sendOrderStatusEmail } = require('../utils/emailUtils');
+
 
 
 // Email setup
